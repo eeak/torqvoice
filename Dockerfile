@@ -24,6 +24,10 @@ COPY . .
 RUN npx prisma generate
 
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
+# Verify the effective heap limit before building
+RUN node -e "console.log('NODE_OPTIONS:', process.env.NODE_OPTIONS); console.log('Heap limit MiB:', Math.round(require('v8').getHeapStatistics().heap_size_limit / 1024 / 1024))"
 
 RUN npm run build
 
@@ -35,7 +39,6 @@ ARG APP_VERSION=development
 ENV APP_VERSION=${APP_VERSION}
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 --home /home/nextjs nextjs
 
