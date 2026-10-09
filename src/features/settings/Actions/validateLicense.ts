@@ -34,7 +34,9 @@ export async function validateLicense(licenseKey: string) {
 
       const { remote, verification } = await revalidateLicense(ctx.organizationId, key, ctx.userId)
 
-      console.log(`На выходе: remote: ${remote} , verification: ${verification}`)
+      console.log(`На выходе:`)
+      console.log('remote:', JSON.stringify(remote, null, 2));
+      console.log('verification:', JSON.stringify(verification, null, 2));
 
       // Let the expiry banner warn again on the next cycle.
       await db.appSetting.deleteMany({
