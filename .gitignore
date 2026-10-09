@@ -47,6 +47,7 @@ next-env.d.ts
 /public/uploads
 /data/uploads/*
 !/data/uploads/.gitkeep
+/uploads
 
 # end-to-end tests
 /e2e/.auth
@@ -55,3 +56,6 @@ next-env.d.ts
 /playwright-report
 /blob-report
 /playwright/.cache
+
+# Database
+/postgres-data
